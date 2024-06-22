@@ -1,0 +1,511 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+
+    <link rel="icon" sizes="256x256" href="/files/icon.png">
+
+    <meta property="og:title" content="gXLg">
+    <meta property="og:description" content="Take a look at a programmer's portfolio">
+    <meta property="og:type" content="profile">
+    <meta property="og:image" content="https://gxlg.dev/files/icon.png">
+    <meta name="theme-color" content="#71C1D1">
+
+    <title>gXLg.dev</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Fredoka&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@1");
+      @import url("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css");
+      @import url("https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css");
+
+      /*
+         Fredoka
+         Code
+         Material Icons
+         Dev Icons
+         Remix Icons
+      */
+
+      * {
+        font-family: "Fredoka", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        font-variation-settings: "wdth" 100;
+      }
+
+      body {
+        background-color: #150f1c;
+      }
+
+      html, body {
+        margin: 0;
+        height: 100%;
+      }
+      
+      #container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      
+      #draw {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+      }
+
+      #box, #pinned {
+        display: inline-block;
+
+        width: 354px;
+        height: 290px;
+
+        background-color: #71d1c1;
+        border-radius: 15px;
+        border: ridge 10px #47a898;
+        box-sizing: border-box;
+
+        position: relative;
+
+        box-shadow: 0 0 5px 5px black;
+      }
+
+      #pinned {
+        position: absolute;
+        top: 10px;
+      }
+      #pinned {
+        height: 110px;
+      }
+      #pinned>div {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      #pinned div.hidden {
+        opacity: 0;
+        transition: all 0.5s linear;
+      }
+      #pinned div.x {
+        visibility: hidden;
+      }
+
+      #pinned div.shown {
+        opacity: 1;
+        transition: all 0.5s linear;
+      }
+
+      page {
+        visibility: hidden;
+        opacity: 0;
+
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      page.next {
+        transform: translateY(30px);
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.3s linear;
+      }
+
+      page.last {
+        transform: translateY(-30px);
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.3s linear;
+      }
+
+      page.now {
+        visibility: visible;
+        opacity: 1;
+        transition: all 0.3s linear;
+      }
+
+      .content {
+        text-align: center;
+        height: 100%;
+        position: relative;
+      }
+
+      page .more {
+        position: absolute;
+        bottom: 5px;
+        right: 8px;
+        opacity: 0;
+      }
+      page .before, #pinned .pin {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+      }
+      page .before {
+        opacity: 0;
+      }
+
+      .link {
+        cursor: pointer;
+      }
+      
+      page.now .more {
+        opacity: 1;
+        transition: all 0.4s cubic-bezier(1, 0, 1, 0);
+      }
+      page.now .before {
+        opacity: 1;
+        transition: all 0.4s cubic-bezier(1, 0, 1, 0);
+      }
+
+      .header, .text>span {
+        background-color: #e1f2ed;
+        color: #150f1c;
+        display: inline-block;
+        border-radius: 5px;
+        border: 2px inset #71d1c1;
+      }
+
+      .header {
+        padding: 2px;
+      }
+      .text>span {
+        padding: 0 5px 2px 5px;
+        margin-bottom: 3px;
+      }
+
+      #pinned>.content>.header {
+        margin-top: 5px;
+        margin-bottom: 3px;
+      }
+
+      code {
+        font-family: "Source Code Pro", monospace;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        font-size: smaller;
+        background-color: #47a89865;
+        padding: 0 2px 0 2px;
+      }
+
+      .micon, .ricon, .dicon {
+        position: relative;
+        color: #150f1c;
+        font-size: 16px;
+      }
+
+      .micon {
+        top: 3px;
+      }
+      .ricon {
+        top: 1px;
+      }
+      .dicon {
+        top: 2px;
+        margin-right: 2px;
+      }
+
+    </style>
+
+    <script src="/scripts/triangle.js"></script>
+    <script src="/index.js"></script>
+
+  </head>
+
+  <body>
+    <div id="container">
+
+      <canvas id="draw"></canvas>
+
+      <div id="pinned"></div>
+
+      <div id="box">
+        <page>
+          <div class="content">
+            <h1 class="header">gXLg</h1>
+            <div class="text">
+              <span>
+                Hi! I am gXLg, also known as `/dev/null`
+              </span><br>
+              <span>
+                A self taught `programmer`<br>
+                with over 8 years of experience
+              </span><br>
+              <span>
+                "Coding offers a chance to create<br>
+                a <code>world</code> - I take this chance and design<br>
+                my own world as I <code>desire</code>"
+              </span>
+            </div>
+          </div>
+        </page>
+
+        <page>
+          <div class="content">
+            <h2 class="header">Personal</h2>
+            <div class="text">
+              <span>
+                Real name - `Dmitry Plesunov`, He/Him
+              </span><br>
+              <span ricon="cake-2-line">
+                `$age` years old
+              </span><br>
+              <span ricon="sparkling-fill">
+                Born in Russia and moved<br>
+                to Germany at the age of 11
+              </span><br>
+              <span ricon="speak">
+                Fluently speaks Russian,<br>
+                German and English
+              </span>
+            </div>
+          </div>
+        </page>
+
+        <page>
+          <div class="content">
+            <h2 class="header">Career</h2>
+            <div class="text">
+              <span ricon="school-line">
+                Completed his high school diploma<br>
+                at `Ignaz Kögler Gymnasium` in 2023
+              </span><br>
+              <span ricon="graduation-cap-line">
+                Studying `Computer Science` at the<br>
+                `Technical University Munich`
+              </span><br>
+              <span ricon="briefcase-line">
+                Working at `doo.net`<br>
+                on customization and<br>
+                project management
+              </span>
+            </div>
+          </div>
+        </page>
+
+        <page>
+          <div class="content">
+            <h2 class="header">Hobbies</h2>
+            <div class="text">
+              <span ricon="magic-line">
+                Enjoys `anime` and japanese culture
+              </span><br>
+              <span ricon="terminal-box-fill">
+                Loves `coding` simple projects for himself<br>
+                or bigger ones for the public
+              </span><br>
+              <span ricon="game-fill">
+                Plays `Minecraft` and `Counter Strike 2`<br>
+                in the free time
+              </span><br>
+            </div>
+          </div>
+        </page>
+
+        <page>
+          <div class="content">
+            <h2 class="header">Achievements</h2>
+            <div class="text">
+              <span micon="trophy">
+                2018 - Math Olympiad<br>
+                1. place in Bavaria Round
+              </span><br>
+              <span micon="license">
+                2023 - German Mathematicians Assoc.<br>
+                High School Graduation Award
+              </span><br>
+              <span micon="leaderboard">
+                2023 - CodingGame leaderboard<br>
+                12,711/803,166 global - 748/30,663 local
+              </span><br>
+            </div>
+          </div>
+        </page>
+
+        <page>
+          <div class="content">
+            <h2 class="header">Achievements</h2>
+            <div class="text">
+              <br>
+              <span micon="new_releases">
+                2023 - CodinGame<br>
+                Python Problem Solving Certificate
+              </span><br>
+              <span micon="new_releases">
+                2023 - CodinGame<br>
+                Javascript Problem Solving Certificate
+              </span><br>
+            </div>
+          </div>
+        </page>
+
+        <page>
+          <div class="content">
+            <h2 class="header">Skills - Development</h2>
+            <div class="text">
+              <br>
+              <span dicon="git-plain">Git</span>
+              <span micon="api">REST API</span>
+              <span micon="neurology">AI</span>
+              <br>
+              <span micon="dns">Back End</span>
+              <span micon="web">Front End</span>
+              <br>
+              <span micon="function">Algorithms</span>
+              <span micon="bug_report">Bugs Tracking</span>
+            </div>
+          </div>
+        </page>
+
+        <page>
+          <div class="content">
+            <h2 class="header">Skills - Platforms</h2>
+            <div class="text">
+              <br>
+              <span ricon="terminal-line">Termux</span>
+              <span dicon="raspberrypi-plain">Raspberry Pi</span>
+              <br>
+              <span dicon="ubuntu-plain">Ubuntu</span>
+              <span dicon="linux-plain">Linux</span>
+              <br>
+              <span dicon="windows11-original">Windows 11</span>
+            </div>
+          </div>
+        </page>
+
+        <page>
+          <div class="content">
+            <h2 class="header">Skills - Environment</h2>
+            <div class="text">
+              <br>
+              <span dicon="intellij-plain">IntelliJ IDEA</span>
+              <span dicon="nano-plain">Nano</span>
+              <br>
+              <span dicon="firefox-plain">Firefox</span>
+              <span dicon="google-plain">Google</span>
+              <span dicon="chrome-plain">Chrome</span>
+              <br>
+              <span dicon="jira-plain">Jira</span>
+              <span dicon="confluence-plain">Confluence</span>
+              <span dicon="github-plain">Github</span>
+              <span dicon="stackoverflow-plain">Stack Overflow</span>
+            </div>
+          </div>
+        </page>
+
+        <page>
+          <div class="content">
+            <h2 class="header">Skills - Tools</h2>
+            <div class="text">
+              <span dicon="bash-plain">Bash</span>
+              <span dicon="gcc-plain">GCC</span>
+              <span dicon="ohmyzsh-plain">Oh-my-zsh</span>
+              <br>
+              <span dicon="ssh-original">SSH</span>
+              <span dicon="nodejs-plain">Node.js</span>
+              <span dicon="graphql-plain">GraphQL</span>
+              <span micon="regular_expression">Regular Expressions</span>
+              <br>
+              <span dicon="fastapi-plain">Fast API</span>
+              <span dicon="oauth-plain">OAuth</span>
+              <span dicon="amazonwebservices-plain-wordmark">AWS</span>
+              <span dicon="cloudflare-plain">Cloudflare</span>
+            </div>
+          </div>
+        </page>
+
+        <page>
+          <div class="content">
+            <h2 class="header">Skills - Frameworks</h2>
+            <div class="text">
+              <span dicon="npm-original-wordmark">NPM</span>
+              <span dicon="gradle-plain">Gradle</span>
+              <span dicon="pypi-plain">PyPi</span>
+              <br>
+              <span dicon="matplotlib-plain">Matplotlib</span>
+              <span dicon="mongodb-plain">MongoDB</span>
+              <span dicon="numpy-plain">NumPy</span>
+              <span dicon="opencv-plain">OpenCV</span>
+              <br>
+              <span dicon="axios-plain">Axios</span>
+              <span dicon="express-original">Express</span>
+              <span dicon="socketio-original">Socket.io</span>
+              <span dicon="jquery-plain">jQuery</span>
+              <br>
+              <span dicon="puppeteer-plain">Puppeteer</span>
+              <span dicon="discordjs-plain">Discord.js</span>
+            </div>
+          </div>
+        </page>
+
+        <page>
+          <div class="content">
+            <h2 class="header">Skills - Languages</h2>
+            <div class="text">
+              <span dicon="c-plain">C</span>
+              <span dicon="java-plain">Java</span>
+              <span dicon="aarch64-plain">Aarch64 Assembly</span>
+              <br>
+              <span dicon="javascript-plain">Javascript</span>
+              <span dicon="python-plain">Python</span>
+              <span dicon="lua-plain">Lua</span>
+              <br>
+              <span dicon="css3-plain">CSS</span>
+              <span dicon="html5-plain">HTML</span>
+              <span dicon="yaml-plain">YAML</span>
+              <span dicon="markdown-original">Markdown</span>
+              <br>
+              <span dicon="latex-plain">LaTeX</span>
+              <span dicon="json-plain">JSON</span>
+              <span dicon="sqlite-plain">SQLite</span>
+              <span ricon="brain-line">Esoteric Languages</span>
+            </div>
+          </div>
+        </page>
+
+        <page>
+          <div class="content">
+            <h2 class="header">Skills - Vitum</h2>
+            <div class="text">
+              <br>
+              <span micon="child_care">Childcare</span>
+              <span ricon="presentation-fill">Teaching</span>
+              <br>
+              <span micon="dashboard">Project management</span>
+              <span micon="equal">Logic</span>
+              <span micon="psychology">Social Engineering</span>
+            </div>
+          </div>
+        </page>
+
+        <page>
+          <div class="content">
+            <h2 class="header">Contact</h2>
+            <div class="text">
+              <br>
+              <span ricon="discord-fill">Discord: gxlg</span>
+              <br>
+              <span ricon="github-fill">GitHub: gXLg</span>
+              <br>
+              <span ricon="reddit-fill">Reddit: KemuriSenpai</span>
+              <br>
+              <span ricon="instagram-line">Instagram: cringe_dima</span>
+            </div>
+          </div>
+        </page>
+
+      </div>
+    </div>
+  </body>
+</html>
+
