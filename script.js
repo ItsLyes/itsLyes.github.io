@@ -1,94 +1,102 @@
-// scripts.js
+function triangle(id, amount, duration, color) {
 
-document.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.createElement('canvas');
-    canvas.id = 'backgroundCanvas';
-    document.body.appendChild(canvas);
+    const canvas = document.getElementById(id);
 
-    const colors = ['#FF6347', '#00FFFF', '#FFFF00']; // Couleurs pour les triangles
-    const numTriangles = 100; // Nombre de triangles
-    const triangleDuration = 10; // Durée de vie des triangles en secondes
+    const context = canvas.getContext("2d");
+    let width, height;
 
-    triangle('backgroundCanvas', numTriangles, triangleDuration, colors);
+    adjustCanvas(canvas);
+    window.onresize = () => adjustCanvas(canvas);
 
-    function triangle(id, amount, duration, colors) {
-        const canvas = document.getElementById(id);
-        const context = canvas.getContext("2d");
-        let width, height;
+    function adjustCanvas(canvas) {
+        const r = canvas.getBoundingClientRect();
+        width = canvas.width = r.width;
+        height = canvas.height = r.height;
 
-        adjustCanvas(canvas);
-        window.onresize = () => adjustCanvas(canvas);
+        context.globalAlpha = 0.1;
+        context.strokeStyle = color;
+    }
 
-        function adjustCanvas(canvas) {
-            const r = canvas.getBoundingClientRect();
-            width = canvas.width = r.width;
-            height = canvas.height = r.height;
+    let points = [];
 
-            context.globalAlpha = 0.1;
+    window.requestAnimationFrame(draw);
+
+    let last = null;
+    let respawn = 0;
+    function draw(timestamp) {
+        if (last == null) {
+            last = timestamp;
+            window.requestAnimationFrame(draw);
+            return
         }
 
-        let points = [];
+        const delta = (timestamp - last) / 1000;
+        last = timestamp;
 
-        window.requestAnimationFrame(draw);
+        const newPoints = [];
+        for (let [x, y, sx, sy, live] of points) {
+            live -= delta;
+            if (live <= 0) continue;
 
-        let last = null;
-        let respawn = 0;
-        function draw(timestamp) {
-            if (last == null) {
-                last = timestamp;
-                window.requestAnimationFrame(draw);
-                return
-            }
+            x += sx * (Math.random() - 0.01) * 2;
+            y += sy * (Math.random() - 0.01) * 2;
 
-            const delta = (timestamp - last) / 1000;
-            last = timestamp;
+            if (x < 0 || x >= width || y < 0 || y >= height) continue;
 
-            const newPoints = [];
-            for (let [x, y, sx, sy, live, color] of points) {
-                live -= delta;
-                if (live <= 0) continue;
+            newPoints.push([x, y, sx, sy, live]);
+        }
 
-                x += sx * (Math.random() - 0.01) * 2;
-                y += sy * (Math.random() - 0.01) * 2;
+        if (newPoints.length < amount && last - respawn > 100) {
+            const x = Math.random() * width;
+            const y = Math.random() * height;
 
-                if (x < 0 || x >= width || y < 0 || y >= height) continue;
+            const sx = (Math.random() - 0.5) * 0.5;
+            const sy = (Math.random() - 0.5) * 0.5;
 
-                newPoints.push([x, y, sx, sy, live, color]);
-            }
+            newPoints.push([x, y, sx, sy, duration]);
 
-            if (newPoints.length < amount && last - respawn > 100) {
-                const x = Math.random() * width;
-                const y = Math.random() * height;
+            respawn = last;
+        }
+        points = newPoints;
 
-                const sx = (Math.random() - 0.5) * 0.5;
-                const sy = (Math.random() - 0.5) * 0.5;
+        context.clearRect(0, 0, width, height);
 
-                const color = colors[Math.floor(Math.random() * colors.length)];
+        /*for (const p1 of points) {
+            const near = [];
+            const [x1, y1] = p1;
+            for (const p2 of points) {
+                const [x2, y2] = p2;
+                if (p1 == p2 || (x1 - x2) ** 2 + (y1 - y2) ** 2 > height * width / 100) continue;
 
-                newPoints.push([x, y, sx, sy, duration, color]);
-
-                respawn = last;
-            }
-            points = newPoints;
-
-            context.clearRect(0, 0, width, height);
-
-            for (const [x1, y1, sx, sy, live, color] of points) {
-                context.globalAlpha = Math.max(0, live / duration);
-                context.strokeStyle = color;
-
-                const radius = 10 * (live / duration);
                 context.beginPath();
-                context.moveTo(x1 + radius, y1);
-                context.lineTo(x1, y1 + radius);
-                context.lineTo(x1 - radius, y1);
-                context.lineTo(x1, y1 - radius);
-                context.closePath();
+                context.moveTo(x1, y1);
+                context.lineTo(x2, y2);
                 context.stroke();
             }
+        }*/
 
-            window.requestAnimationFrame(draw);
+
+        for (const p1 of points) {
+            const dis = [];
+            const [x1, y1] = p1;
+            for (const p2 of points) {
+                if (p1 == p2) continue;
+                const [x2, y2] = p2;
+                const d = (x1 - x2) ** 2 + (y1 - y2) ** 2;
+                dis.push([x2, y2, d]);
+            }
+            if (dis.length < 5) continue;
+
+            dis.sort((a, b) => a[2] - b[2]);
+            const near = dis.slice(0, 5);
+            for (const [x2, y2, d] of near) {
+                context.beginPath();
+                context.moveTo(x1, y1);
+                context.lineTo(x2, y2);
+                context.stroke();
+            }
         }
-    }
-});
 
+        window.requestAnimationFrame(draw);
+    }
+}
