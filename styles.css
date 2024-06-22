@@ -1,0 +1,28 @@
+page {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+page.next {
+    transform: translateY(30px);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s linear;
+}
+
+page.last {
+    transform: translateY(-30px);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s linear;
+}
+
+page.now {
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.3s linear;
+}
+
