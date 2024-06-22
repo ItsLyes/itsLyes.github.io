@@ -1,0 +1,8 @@
+/* styles.css */
+body {
+    background-image: url('/image/wallpaper.gif');
+    background-size: cover; /* Pour que l'image couvre tout l'écran */
+    background-repeat: no-repeat; /* Pour éviter que l'image se répète */
+    background-position: center; /* Pour centrer l'image */
+}
+
