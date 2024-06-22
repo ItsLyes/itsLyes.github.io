@@ -323,8 +323,12 @@ code {
 .demo {
     display: flex;
     justify-content: center;
-    margin-top: 20px; /* Ajustez la marge */
-    width: 100%;
+    align-items: flex-end; /* Aligne les flèches en bas du conteneur */
+    gap: 32px; /* Ajoute un espace entre les flèches */
+    height: 100%; /* S'assure que le conteneur prend toute la hauteur disponible */
+    position: absolute; /* Permet de positionner les flèches au bas */
+    bottom: 20px; /* Ajuste cette valeur selon votre préférence pour la distance du bas */
+    width: 100%; /* S'assure que le conteneur prend toute la largeur disponible */
 }
 
 html {
