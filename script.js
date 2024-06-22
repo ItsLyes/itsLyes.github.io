@@ -1,4 +1,3 @@
-<script>
 document.addEventListener("DOMContentLoaded", function() {
     const pages = document.querySelectorAll("page");
     let currentPageIndex = 0;
@@ -31,5 +30,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
     showPage(currentPageIndex);
 });
-</script>
 
