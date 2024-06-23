@@ -1,27 +1,45 @@
-	body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-	    background-color: #1b1b2f;
-        }
-        #container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-	}
+/* styles.css */
 
-        .content {
-        text-align: center;
-        height: 100%;
-        position: relative;
-	color: #e43f5a;
-      }
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #1b1b2f; /* Bleu nuit très sombre */
+}
 
-	#draw {
-	    width: 100%;
-            height: 100%;
-            position: absolute;
-        }
+#container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.content {
+    text-align: center;
+    background-color: #33354a; /* Fond gris-bleu foncé */
+    color: #000000; /* Texte en noir */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#draw {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#triangleBox {
+    background-color: #e43f5a; /* Couleur des triangles */
+    color: #000000; /* Texte en noir */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px; /* Espacement autour de la boîte */
+    text-align: center;
+}
+

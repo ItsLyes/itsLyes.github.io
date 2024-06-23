@@ -4,22 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Portfolio</title>
-    <!-- Autres balises meta, liens CSS, etc. -->
-     <link rel="stylesheet" href="styles.css">
+    <!-- Inclusion du fichier CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Contenu de votre site web -->
+    <!-- Conteneur principal pour centrer le contenu -->
     <div id="container">
-    <canvas id="draw"></canvas>
         <!-- Contenu de votre site web centré -->
         <div class="content">
             <h1>Welcome to my portfolio</h1>
             <p>Here you can find all my awesome projects!</p>
+
+            <!-- Nouvelle boîte avec la même couleur que les triangles -->
+            <div id="triangleBox">
+                <h2>My Projects</h2>
+                <p>This box has the same color as the triangles.</p>
+            </div>
         </div>
     </div>
-    <!-- Fin du contenu -->
-
-    <!-- Chargement du fichier JavaScript -->
+    
+    <!-- Canvas qui prend toute la taille de la page -->
+    <canvas id="draw"></canvas>
+    
+    <!-- Chargement des fichiers JavaScript -->
     <script src="triangle.js"></script>
     <script src="index.js"></script>
 </body>
