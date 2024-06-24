@@ -23,9 +23,9 @@ body, html {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 80%; /* Largeur fixe */
-    max-width: 600px; /* Largeur maximale */
+    max-width: 500px; /* Largeur maximale */
     height: 60%; /* Hauteur fixe */
-    max-height: 400px; /* Hauteur maximale */
+    max-height: 350px; /* Hauteur maximale */
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /* Aligner le titre en haut */
