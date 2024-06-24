@@ -13,15 +13,23 @@
         <!-- Contenu de votre site web centré -->
         <div class="content">
             <h1>Welcome to my portfolio</h1>
-	    <h3>Here you can find my bio and all my awesome projects!</h3>
+            <h3>Here you can find my bio and all my awesome projects!</h3>
 
-            <!-- Nouvelle boîte avec la même couleur que les triangles -->
-            <div class="triangleBox">
+            <!-- Nouvelle boîte avec des IDs uniques -->
+            <div id="box1" class="box">
                 <h2>Myself</h2>
-		<h3>My name is Lyès Heulers, I'm 19 years old born in France and moved to Canada at 17.<br><br>I'm fluent in English and French.</h3>
+                <h3>My name is Lyès Heulers, I'm 19 years old born in France and moved to Canada at 17.<br><br>I'm fluent in English and French.</h3>
             </div>
 
-        </div>
+            <div id="box2" class="box">
+                <h2>Coding</h2>
+           </div>
+	   	<!-- Boutons de navigation -->
+            <div class="navigation">
+                <button onclick="showBox('box1')">Myself</button>
+                <button onclick="showBox('box2')">Coding</button>
+            </div>
+	</div>
     </div>
     
     <!-- Canvas qui prend toute la taille de la page -->

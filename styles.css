@@ -5,6 +5,8 @@ body, html {
     padding: 0;
     height: 100%;
     background-color: #1b1b2f; /* Bleu nuit très sombre */
+    position: relative;
+    z-index: -2;
 }
 
 .container {
@@ -25,7 +27,7 @@ body, html {
     width: 80%; /* Largeur fixe */
     max-width: 500px; /* Largeur maximale */
     height: 60%; /* Hauteur fixe */
-    max-height: 350px; /* Hauteur maximale */
+    max-height: 400px; /* Hauteur maximale */
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /* Aligner le titre en haut */
@@ -45,16 +47,16 @@ body, html {
     padding: 10px 0;
 }
 
-
 #draw {
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
+    z-index: -1;
 }
 
-.triangleBox {
+.box {
     background-color: #e43f5a; /* Couleur des triangles */
     color: #000000; /* Texte en noir */
     padding: 20px;
@@ -65,21 +67,40 @@ body, html {
     max-width: 600px; /* Largeur maximale */
     height: 60%; /* Hauteur fixe */
     max-height: 400px; /* Hauteur maximale */
-    display: flex;
+    display: none; /* Masquer les boîtes par défaut */
     flex-direction: column;
     justify-content: flex-start; /* Aligner le titre en haut */
-    overflow-y: auto; /* Permettre le défilement si le contenu dépasse */
+    /*overflow-y: auto;  Permettre le défilement si le contenu dépasse */
 }
 
-.triangleBox h2 {
+.box h2 {
     margin: 0;
     padding: 10px 0;
     text-align: center; /* Centrer le titre horizontalement */
 }
 
-.triangleBox h3 {
+.box h3 {
     text-align: center; /* Centrer le contenu horizontalement */
     margin: 0; /* Supprimer les marges par défaut des paragraphes */
     padding: 10px 0;
+}
+
+.navigation {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.navigation button {
+    background-color: #e43f5a;
+    border: none;
+    color: #000000;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.navigation button:hover {
+    background-color: #d53649;
 }
 
