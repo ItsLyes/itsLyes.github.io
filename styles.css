@@ -7,7 +7,7 @@ body, html {
     background-color: #1b1b2f; /* Bleu nuit très sombre */
 }
 
-#container {
+.container {
     width: 100%;
     height: 100%;
     display: flex;
@@ -17,13 +17,34 @@ body, html {
 }
 
 .content {
-    text-align: center;
     background-color: #33354a; /* Fond gris-bleu foncé */
     color: #000000; /* Texte en noir */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%; /* Largeur fixe */
+    max-width: 600px; /* Largeur maximale */
+    height: 60%; /* Hauteur fixe */
+    max-height: 400px; /* Hauteur maximale */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Aligner le titre en haut */
+    overflow-y: auto; /* Permettre le défilement si le contenu dépasse */
+    margin: 0 auto; /* Centrer horizontalement */
 }
+
+.content h1 {
+    margin: 0;
+    padding: 10px 0;
+    text-align: center; /* Centrer le titre horizontalement */
+}
+
+.content p {
+    text-align: center; /* Centrer le contenu horizontalement */
+    margin: 0; /* Supprimer les marges par défaut des paragraphes */
+    padding: 10px 0;
+}
+
 
 #draw {
     width: 100%;
@@ -33,13 +54,32 @@ body, html {
     left: 0;
 }
 
-#triangleBox {
+.triangleBox {
     background-color: #e43f5a; /* Couleur des triangles */
     color: #000000; /* Texte en noir */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 20px; /* Espacement autour de la boîte */
-    text-align: center;
+    margin: 20px auto; /* Espacement autour de la boîte, centré horizontalement */
+    width: 80%; /* Largeur fixe */
+    max-width: 600px; /* Largeur maximale */
+    height: 60%; /* Hauteur fixe */
+    max-height: 400px; /* Hauteur maximale */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Aligner le titre en haut */
+    overflow-y: auto; /* Permettre le défilement si le contenu dépasse */
+}
+
+.triangleBox h2 {
+    margin: 0;
+    padding: 10px 0;
+    text-align: center; /* Centrer le titre horizontalement */
+}
+
+.triangleBox p {
+    text-align: center; /* Centrer le contenu horizontalement */
+    margin: 0; /* Supprimer les marges par défaut des paragraphes */
+    padding: 10px 0;
 }
 
