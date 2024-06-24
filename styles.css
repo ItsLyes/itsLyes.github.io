@@ -39,7 +39,7 @@ body, html {
     text-align: center; /* Centrer le titre horizontalement */
 }
 
-.content p {
+.content h3 {
     text-align: center; /* Centrer le contenu horizontalement */
     margin: 0; /* Supprimer les marges par défaut des paragraphes */
     padding: 10px 0;
@@ -77,7 +77,7 @@ body, html {
     text-align: center; /* Centrer le titre horizontalement */
 }
 
-.triangleBox p {
+.triangleBox h3 {
     text-align: center; /* Centrer le contenu horizontalement */
     margin: 0; /* Supprimer les marges par défaut des paragraphes */
     padding: 10px 0;
