@@ -31,7 +31,7 @@ body, html {
     width: 80%; /* Largeur fixe */
     max-width: 500px; /* Largeur maximale */
     height: 60%; /* Hauteur fixe */
-    max-height: 400px; /* Hauteur maximale */
+    max-height: 425px; /* Hauteur maximale */
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /* Aligner le titre en haut */
@@ -115,3 +115,4 @@ body, html {
 .box:first-of-type {
     display: flex;
 }
+
