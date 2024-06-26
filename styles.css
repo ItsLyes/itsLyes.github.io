@@ -1,4 +1,8 @@
 /* styles.css */
+@font-face {
+    font-family: 'Higborn';
+    src: url('fonts/Higborn.otf') format('opentype');
+}
 
 body, html {
     margin: 0;
@@ -39,6 +43,7 @@ body, html {
     margin: 0;
     padding: 10px 0;
     text-align: center; /* Centrer le titre horizontalement */
+    font-family: 'Higborn', sans-serif;
 }
 
 .content h3 {
@@ -70,13 +75,14 @@ body, html {
     display: none; /* Masquer les boîtes par défaut */
     flex-direction: column;
     justify-content: flex-start; /* Aligner le titre en haut */
-    /*overflow-y: auto;  Permettre le défilement si le contenu dépasse */
+    overflow-y: auto;  /*Permettre le défilement si le contenu dépasse */
 }
 
 .box h2 {
     margin: 0;
     padding: 10px 0;
     text-align: center; /* Centrer le titre horizontalement */
+    font-family: 'Higborn', sans-serif;
 }
 
 .box h3 {
@@ -102,5 +108,10 @@ body, html {
 
 .navigation button:hover {
     background-color: #d53649;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
+.box:first-of-type {
+    display: flex;
+}
