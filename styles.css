@@ -116,3 +116,13 @@ body, html {
     display: flex;
 }
 
+a {
+    color: #fff; /* Changer la couleur des liens */
+    text-decoration: none; /* Supprimer le soulignement par défaut */
+    
+}
+
+a:hover {
+    text-decoration: underline; /* Ajouter un soulignement au survol */
+}
+
