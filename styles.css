@@ -126,3 +126,6 @@ a:hover {
     text-decoration: underline; /* Ajouter un soulignement au survol */
 }
 
+i {
+    font-size: 24px;
+}
